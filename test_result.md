@@ -195,10 +195,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Google Sheets API Integration"
-    - "Filter Multiple IDs Endpoint"
     - "Search Interface"
     - "Time Dropdown with Specific Ranges"
+    - "Results Display in Plain Text"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
