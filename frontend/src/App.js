@@ -180,23 +180,42 @@ function App() {
                       const rowId = `${result.query_id}-${match.row_number}`;
                       return (
                         <div key={matchIndex} className="p-6 hover:bg-gray-50 transition-colors">
-                          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-                            {/* Row Info */}
+                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                            {/* Combined Row Info and Result Display */}
                             <div className="lg:col-span-1">
-                              <p className="text-sm font-medium text-gray-500 mb-1">
-                                Row #{match.row_number}
+                              <p className="text-sm font-medium text-gray-500 mb-2">
+                                Row #{match.row_number} - Complete Result
                               </p>
-                              <div className="bg-gray-100 rounded-lg p-3">
-                                <p className="text-gray-800 font-mono text-sm break-all">
-                                  {formatRowData(match.data)}
-                                </p>
+                              <div className="bg-gray-100 rounded-lg p-4 border-l-4 border-blue-500">
+                                <div className="space-y-2">
+                                  <p className="text-gray-800 font-mono text-sm break-all">
+                                    {formatRowData(match.data)}
+                                  </p>
+                                  {timeAssignments[rowId] && (
+                                    <div className="mt-3 pt-3 border-t border-gray-300">
+                                      <p className="text-blue-700 font-semibold text-sm">
+                                        🕒 Assigned Time: {timeAssignments[rowId]}
+                                      </p>
+                                    </div>
+                                  )}
+                                </div>
                               </div>
+                              
+                              {/* Combined Plain Text Result */}
+                              {timeAssignments[rowId] && (
+                                <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-3">
+                                  <p className="text-xs font-medium text-blue-700 mb-1">Plain Text Result:</p>
+                                  <p className="text-blue-800 font-mono text-sm">
+                                    {formatRowData(match.data)} | Time: {timeAssignments[rowId]}
+                                  </p>
+                                </div>
+                              )}
                             </div>
 
                             {/* Time Selection */}
                             <div className="lg:col-span-1">
                               <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Assign Time Slot
+                                {timeAssignments[rowId] ? 'Change Time Slot' : 'Assign Time Slot'}
                               </label>
                               <select
                                 value={timeAssignments[rowId] || ''}
@@ -210,24 +229,17 @@ function App() {
                                   </option>
                                 ))}
                               </select>
-                            </div>
-
-                            {/* Assigned Time Display */}
-                            <div className="lg:col-span-1">
-                              <p className="text-sm font-medium text-gray-700 mb-2">
-                                Current Assignment
-                              </p>
-                              <div className="bg-green-50 border border-green-200 rounded-lg p-3 min-h-[40px] flex items-center">
-                                {timeAssignments[rowId] ? (
-                                  <span className="text-green-800 font-medium text-sm">
-                                    🕒 {timeAssignments[rowId]}
-                                  </span>
-                                ) : (
-                                  <span className="text-gray-500 text-sm italic">
-                                    No time assigned
-                                  </span>
-                                )}
-                              </div>
+                              
+                              {timeAssignments[rowId] && (
+                                <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
+                                  <p className="text-green-800 font-medium text-sm">
+                                    ✅ Time Successfully Assigned
+                                  </p>
+                                  <p className="text-green-700 text-xs mt-1">
+                                    This result now includes the time slot
+                                  </p>
+                                </div>
+                              )}
                             </div>
                           </div>
                         </div>
