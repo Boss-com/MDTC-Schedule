@@ -360,13 +360,19 @@ function App() {
 
                             {/* Time Selection */}
                             <div className="lg:col-span-1">
-                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                              <label className={`block text-sm font-medium mb-2 ${
+                                isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                              }`}>
                                 {timeAssignments[rowId] ? 'Change Time Slot' : 'Assign Time Slot'}
                               </label>
                               <select
                                 value={timeAssignments[rowId] || ''}
                                 onChange={(e) => handleTimeAssignment(rowId, e.target.value)}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm ${
+                                  isDarkMode 
+                                    ? 'bg-gray-700 border-gray-600 text-white' 
+                                    : 'bg-white border-gray-300 text-gray-900'
+                                }`}
                               >
                                 <option value="">Select Time Range</option>
                                 {timeSlots.map((slot, index) => (
@@ -377,11 +383,19 @@ function App() {
                               </select>
                               
                               {timeAssignments[rowId] && (
-                                <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
-                                  <p className="text-green-800 font-medium text-sm">
+                                <div className={`mt-3 p-3 border rounded-lg ${
+                                  isDarkMode 
+                                    ? 'bg-green-900 border-green-700' 
+                                    : 'bg-green-50 border-green-200'
+                                }`}>
+                                  <p className={`font-medium text-sm ${
+                                    isDarkMode ? 'text-green-300' : 'text-green-800'
+                                  }`}>
                                     ✅ Time Successfully Assigned
                                   </p>
-                                  <p className="text-green-700 text-xs mt-1">
+                                  <p className={`text-xs mt-1 ${
+                                    isDarkMode ? 'text-green-400' : 'text-green-700'
+                                  }`}>
                                     This result now includes the time slot
                                   </p>
                                 </div>
