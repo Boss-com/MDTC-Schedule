@@ -150,16 +150,58 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
+    <div className={`min-h-screen py-8 transition-colors duration-300 ${
+      isDarkMode 
+        ? 'bg-gradient-to-br from-gray-900 to-gray-800 text-white' 
+        : 'bg-gradient-to-br from-blue-50 to-indigo-100 text-gray-900'
+    }`}>
       <div className="max-w-6xl mx-auto px-4">
-        {/* Header */}
+        {/* Header with Dark Mode Toggle */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">
-            Google Sheets Filter Tool
-          </h1>
-          <p className="text-gray-600 text-lg">
-            Filter multiple IDs from your Google Sheet and assign time slots
-          </p>
+          <div className="flex justify-between items-start mb-4">
+            <div></div> {/* Spacer */}
+            <div className="flex-1">
+              <h1 className={`text-4xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
+                Google Sheets Filter Tool
+              </h1>
+              <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                Filter multiple IDs from your Google Sheet and assign time slots
+              </p>
+            </div>
+            
+            {/* Dark Mode Toggle */}
+            <div className="flex items-center space-x-3">
+              <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                {isDarkMode ? '🌙' : '☀️'}
+              </span>
+              <button
+                onClick={toggleDarkMode}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                  isDarkMode ? 'bg-blue-600' : 'bg-gray-300'
+                }`}
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    isDarkMode ? 'translate-x-6' : 'translate-x-1'
+                  }`}
+                />
+              </button>
+              <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                {isDarkMode ? 'Dark' : 'Light'}
+              </span>
+            </div>
+          </div>
+          
+          {/* Copy Feedback */}
+          {copyFeedback && (
+            <div className={`mb-4 p-2 rounded-lg text-sm font-medium ${
+              isDarkMode 
+                ? 'bg-green-800 text-green-200 border border-green-700' 
+                : 'bg-green-100 text-green-800 border border-green-200'
+            }`}>
+              ✅ {copyFeedback}
+            </div>
+          )}
         </div>
 
         {/* Search Section */}
