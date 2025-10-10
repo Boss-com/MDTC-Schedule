@@ -210,7 +210,9 @@ function App() {
         }`}>
           <div className="flex flex-col space-y-4">
             <div>
-              <label htmlFor="search" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="search" className={`block text-sm font-medium mb-2 ${
+                isDarkMode ? 'text-gray-300' : 'text-gray-700'
+              }`}>
                 Enter IDs (comma-separated)
               </label>
               <div className="flex space-x-3">
@@ -220,7 +222,11 @@ function App() {
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
                   placeholder="e.g., ID001, ID002, Name1"
-                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
+                  className={`flex-1 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg ${
+                    isDarkMode 
+                      ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
+                      : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
+                  }`}
                   onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                 />
                 <button
@@ -231,12 +237,28 @@ function App() {
                   {loading ? 'Searching...' : 'Search'}
                 </button>
                 {results.length > 0 && (
-                  <button
-                    onClick={clearResults}
-                    className="px-6 py-3 bg-gray-500 text-white font-semibold rounded-lg hover:bg-gray-600 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
-                  >
-                    Clear
-                  </button>
+                  <>
+                    <button
+                      onClick={copyAllResults}
+                      className={`px-6 py-3 font-semibold rounded-lg focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors ${
+                        isDarkMode 
+                          ? 'bg-green-700 text-white hover:bg-green-600' 
+                          : 'bg-green-600 text-white hover:bg-green-700'
+                      }`}
+                    >
+                      📋 Copy All
+                    </button>
+                    <button
+                      onClick={clearResults}
+                      className={`px-6 py-3 font-semibold rounded-lg focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors ${
+                        isDarkMode 
+                          ? 'bg-gray-600 text-white hover:bg-gray-500' 
+                          : 'bg-gray-500 text-white hover:bg-gray-600'
+                      }`}
+                    >
+                      Clear
+                    </button>
+                  </>
                 )}
               </div>
             </div>
