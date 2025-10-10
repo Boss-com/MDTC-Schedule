@@ -166,7 +166,14 @@ function App() {
       }
     });
     
+    if (allResults.length === 0) {
+      setCopyFeedback('No results to copy');
+      setTimeout(() => setCopyFeedback(''), 2000);
+      return;
+    }
+    
     const combinedResults = allResults.join('\n');
+    console.log('Copying all results:', combinedResults);
     copyToClipboard(combinedResults, 'All results');
   };
 
