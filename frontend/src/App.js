@@ -335,24 +335,11 @@ function App() {
                           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
                             {/* Combined Row Info and Result Display */}
                             <div className="lg:col-span-1">
-                              <div className="flex items-center justify-between mb-2">
-                                <p className={`text-sm font-medium ${
-                                  isDarkMode ? 'text-gray-400' : 'text-gray-500'
-                                }`}>
-                                  Row #{match.row_number} - Complete Result
-                                </p>
-                                <button
-                                  onClick={() => copyIndividualResult(match, rowId)}
-                                  className={`px-3 py-1 text-xs font-medium rounded-lg transition-colors ${
-                                    isDarkMode 
-                                      ? 'bg-blue-700 text-blue-200 hover:bg-blue-600' 
-                                      : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
-                                  }`}
-                                  title="Copy this result"
-                                >
-                                  📋 Copy
-                                </button>
-                              </div>
+                              <p className={`text-sm font-medium mb-2 ${
+                                isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                              }`}>
+                                Row #{match.row_number} - Complete Result
+                              </p>
                               <div className={`rounded-lg p-4 border-l-4 border-blue-500 ${
                                 isDarkMode ? 'bg-gray-700' : 'bg-gray-100'
                               }`}>
@@ -376,25 +363,41 @@ function App() {
                                 </div>
                               </div>
                               
-                              {/* Combined Plain Text Result */}
-                              {timeAssignments[rowId] && (
-                                <div className={`mt-4 border rounded-lg p-3 ${
-                                  isDarkMode 
-                                    ? 'bg-blue-900 border-blue-700' 
-                                    : 'bg-blue-50 border-blue-200'
-                                }`}>
-                                  <p className={`text-xs font-medium mb-1 ${
-                                    isDarkMode ? 'text-blue-300' : 'text-blue-700'
-                                  }`}>
-                                    Plain Text Result:
-                                  </p>
-                                  <p className={`font-mono text-sm ${
-                                    isDarkMode ? 'text-blue-200' : 'text-blue-800'
-                                  }`}>
-                                    {formatRowData(match.data)} | Time: {timeAssignments[rowId]}
-                                  </p>
+                              {/* Plain Text Result Box with Copy Button */}
+                              <div className={`mt-4 border rounded-lg ${
+                                isDarkMode 
+                                  ? 'bg-blue-900 border-blue-700' 
+                                  : 'bg-blue-50 border-blue-200'
+                              }`}>
+                                <div className="flex items-center justify-between p-3">
+                                  <div className="flex-1">
+                                    <p className={`text-xs font-medium mb-1 ${
+                                      isDarkMode ? 'text-blue-300' : 'text-blue-700'
+                                    }`}>
+                                      Plain Text Result:
+                                    </p>
+                                    <p className={`font-mono text-sm ${
+                                      isDarkMode ? 'text-blue-200' : 'text-blue-800'
+                                    }`}>
+                                      {timeAssignments[rowId] ? 
+                                        `${formatRowData(match.data)} | Time: ${timeAssignments[rowId]}` :
+                                        formatRowData(match.data)
+                                      }
+                                    </p>
+                                  </div>
+                                  <button
+                                    onClick={() => copyIndividualResult(match, rowId)}
+                                    className={`ml-3 px-3 py-1 text-xs font-medium rounded-lg transition-colors ${
+                                      isDarkMode 
+                                        ? 'bg-blue-800 text-blue-200 hover:bg-blue-700 border border-blue-600' 
+                                        : 'bg-blue-200 text-blue-800 hover:bg-blue-300 border border-blue-300'
+                                    }`}
+                                    title="Copy this plain text result"
+                                  >
+                                    📋 Copy Result
+                                  </button>
                                 </div>
-                              )}
+                              </div>
                             </div>
 
                             {/* Time Selection */}
