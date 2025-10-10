@@ -408,12 +408,14 @@ function App() {
                   </div>
                 ) : (
                   <div className="p-6 text-center">
-                    <div className="text-gray-400 mb-2">
+                    <div className={`mb-2 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>
                       <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.29-1.005-5.971-2.572M15 3H9a6 6 0 00-6 6v9a2 2 0 002 2h10a2 2 0 002-2V9a6 6 0 00-6-6z" />
                       </svg>
                     </div>
-                    <p className="text-gray-500">No matches found for this ID</p>
+                    <p className={isDarkMode ? 'text-gray-400' : 'text-gray-500'}>
+                      No matches found for this ID
+                    </p>
                   </div>
                 )}
               </div>
