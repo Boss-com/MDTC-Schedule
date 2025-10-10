@@ -284,16 +284,7 @@ function App() {
                     >
                       📋 Copy All
                     </button>
-                    <button
-                      onClick={() => copyToClipboard('Test copy functionality - this is a sample text to test if copy works!', 'Test')}
-                      className={`px-4 py-3 font-semibold rounded-lg focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-colors ${
-                        isDarkMode 
-                          ? 'bg-purple-700 text-white hover:bg-purple-600' 
-                          : 'bg-purple-600 text-white hover:bg-purple-700'
-                      }`}
-                    >
-                      🧪 Test Copy
-                    </button>
+                    {/* Removed duplicate test button */}
                     <button
                       onClick={clearResults}
                       className={`px-6 py-3 font-semibold rounded-lg focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors ${
