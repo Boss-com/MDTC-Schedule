@@ -154,27 +154,28 @@ function App() {
   };
 
   const copyAllResults = () => {
-    let allResults = [];
+    let allPlainTextResults = [];
     results.forEach(result => {
       if (result.matches && result.matches.length > 0) {
         result.matches.forEach(match => {
           const rowId = `${result.query_id}-${match.row_number}`;
           const rowData = formatRowData(match.data);
           const timeAssignment = timeAssignments[rowId];
-          const fullResult = timeAssignment ? `${rowData} | Time: ${timeAssignment}` : rowData;
-          allResults.push(fullResult);
+          // Copy the exact format from the plain text result boxes
+          const plainTextResult = timeAssignment ? `${rowData} | Time: ${timeAssignment}` : rowData;
+          allPlainTextResults.push(plainTextResult);
         });
       }
     });
     
-    if (allResults.length === 0) {
+    if (allPlainTextResults.length === 0) {
       setCopyFeedback('No results to copy');
       setTimeout(() => setCopyFeedback(''), 2000);
       return;
     }
     
-    const combinedResults = allResults.join('\n');
-    console.log('Copying all results:', combinedResults);
+    const combinedResults = allPlainTextResults.join('\n');
+    console.log('Copying all plain text results:', combinedResults);
     copyToClipboard(combinedResults, 'All results');
   };
 
