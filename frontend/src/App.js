@@ -302,18 +302,6 @@ function App() {
             
             <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
               <p>💡 Tip: Enter multiple IDs separated by commas to filter multiple rows at once</p>
-              <div className="mt-3">
-                <button
-                  onClick={() => copyToClipboard('Test copy functionality - this is a sample text to test if copy works!', 'Test')}
-                  className={`px-4 py-2 text-xs font-semibold rounded-lg focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-colors ${
-                    isDarkMode 
-                      ? 'bg-purple-700 text-white hover:bg-purple-600' 
-                      : 'bg-purple-600 text-white hover:bg-purple-700'
-                  }`}
-                >
-                  🧪 Test Copy Function
-                </button>
-              </div>
             </div>
           </div>
         </div>
