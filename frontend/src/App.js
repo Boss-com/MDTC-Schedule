@@ -273,7 +273,9 @@ function App() {
         {results.length > 0 && (
           <div className="space-y-6">
             {results.map((result, resultIndex) => (
-              <div key={resultIndex} className="bg-white rounded-xl shadow-lg overflow-hidden">
+              <div key={resultIndex} className={`rounded-xl shadow-lg overflow-hidden ${
+                isDarkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white'
+              }`}>
                 <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4">
                   <h3 className="text-xl font-semibold text-white">
                     Search ID: "{result.query_id}" 
