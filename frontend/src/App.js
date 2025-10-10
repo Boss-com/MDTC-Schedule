@@ -286,11 +286,13 @@ function App() {
                 </div>
 
                 {result.matches.length > 0 ? (
-                  <div className="divide-y divide-gray-200">
+                  <div className={`divide-y ${isDarkMode ? 'divide-gray-700' : 'divide-gray-200'}`}>
                     {result.matches.map((match, matchIndex) => {
                       const rowId = `${result.query_id}-${match.row_number}`;
                       return (
-                        <div key={matchIndex} className="p-6 hover:bg-gray-50 transition-colors">
+                        <div key={matchIndex} className={`p-6 transition-colors ${
+                          isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'
+                        }`}>
                           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
                             {/* Combined Row Info and Result Display */}
                             <div className="lg:col-span-1">
