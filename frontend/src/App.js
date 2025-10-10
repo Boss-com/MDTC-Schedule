@@ -6,6 +6,8 @@ function App() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [timeAssignments, setTimeAssignments] = useState({});
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [copyFeedback, setCopyFeedback] = useState('');
 
   // Time slots as shown in the user's image
   const timeSlots = [
