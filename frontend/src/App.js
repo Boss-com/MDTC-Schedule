@@ -463,7 +463,9 @@ function App() {
         )}
 
         {/* Footer */}
-        <div className="text-center mt-8 text-gray-500 text-sm">
+        <div className={`text-center mt-8 text-sm ${
+          isDarkMode ? 'text-gray-400' : 'text-gray-500'
+        }`}>
           <p>Google Sheets Integration • Filter by ID/Name • Time Assignment Tool</p>
         </div>
       </div>
