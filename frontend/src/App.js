@@ -147,9 +147,10 @@ function App() {
   const copyIndividualResult = (match, rowId) => {
     const rowData = formatRowData(match.data);
     const timeAssignment = timeAssignments[rowId];
-    const fullResult = timeAssignment ? `${rowData} | Time: ${timeAssignment}` : rowData;
-    console.log('Copying individual result:', fullResult);
-    copyToClipboard(fullResult, 'Result');
+    // Copy the exact format shown in the "Plain Text Result" box
+    const resultToCopy = timeAssignment ? `${rowData} | Time: ${timeAssignment}` : rowData;
+    console.log('Copying individual result:', resultToCopy);
+    copyToClipboard(resultToCopy, 'Result');
   };
 
   const copyAllResults = () => {
