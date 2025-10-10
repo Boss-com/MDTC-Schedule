@@ -205,7 +205,9 @@ function App() {
         </div>
 
         {/* Search Section */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+        <div className={`rounded-xl shadow-lg p-6 mb-8 ${
+          isDarkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white'
+        }`}>
           <div className="flex flex-col space-y-4">
             <div>
               <label htmlFor="search" className="block text-sm font-medium text-gray-700 mb-2">
