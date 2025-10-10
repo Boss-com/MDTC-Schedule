@@ -110,13 +110,37 @@ function App() {
 
   const copyToClipboard = async (text, type = 'result') => {
     try {
-      await navigator.clipboard.writeText(text);
-      setCopyFeedback(`${type} copied to clipboard!`);
-      setTimeout(() => setCopyFeedback(''), 2000);
+      // Try the modern clipboard API first
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        setCopyFeedback(`${type} copied to clipboard!`);
+        setTimeout(() => setCopyFeedback(''), 3000);
+        return;
+      }
+      
+      // Fallback method for older browsers or non-secure contexts
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      textArea.style.top = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      const successful = document.execCommand('copy');
+      document.body.removeChild(textArea);
+      
+      if (successful) {
+        setCopyFeedback(`${type} copied to clipboard!`);
+        setTimeout(() => setCopyFeedback(''), 3000);
+      } else {
+        throw new Error('Copy command failed');
+      }
     } catch (err) {
       console.error('Failed to copy: ', err);
-      setCopyFeedback('Failed to copy to clipboard');
-      setTimeout(() => setCopyFeedback(''), 2000);
+      setCopyFeedback('Copy failed - please select and copy manually');
+      setTimeout(() => setCopyFeedback(''), 3000);
     }
   };
 
