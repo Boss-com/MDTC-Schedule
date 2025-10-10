@@ -263,7 +263,7 @@ function App() {
               </div>
             </div>
             
-            <div className="text-sm text-gray-500">
+            <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
               <p>💡 Tip: Enter multiple IDs separated by commas to filter multiple rows at once</p>
             </div>
           </div>
