@@ -296,17 +296,40 @@ function App() {
                           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
                             {/* Combined Row Info and Result Display */}
                             <div className="lg:col-span-1">
-                              <p className="text-sm font-medium text-gray-500 mb-2">
-                                Row #{match.row_number} - Complete Result
-                              </p>
-                              <div className="bg-gray-100 rounded-lg p-4 border-l-4 border-blue-500">
+                              <div className="flex items-center justify-between mb-2">
+                                <p className={`text-sm font-medium ${
+                                  isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                                }`}>
+                                  Row #{match.row_number} - Complete Result
+                                </p>
+                                <button
+                                  onClick={() => copyIndividualResult(match, rowId)}
+                                  className={`px-3 py-1 text-xs font-medium rounded-lg transition-colors ${
+                                    isDarkMode 
+                                      ? 'bg-blue-700 text-blue-200 hover:bg-blue-600' 
+                                      : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+                                  }`}
+                                  title="Copy this result"
+                                >
+                                  📋 Copy
+                                </button>
+                              </div>
+                              <div className={`rounded-lg p-4 border-l-4 border-blue-500 ${
+                                isDarkMode ? 'bg-gray-700' : 'bg-gray-100'
+                              }`}>
                                 <div className="space-y-2">
-                                  <p className="text-gray-800 font-mono text-sm break-all">
+                                  <p className={`font-mono text-sm break-all ${
+                                    isDarkMode ? 'text-gray-200' : 'text-gray-800'
+                                  }`}>
                                     {formatRowData(match.data)}
                                   </p>
                                   {timeAssignments[rowId] && (
-                                    <div className="mt-3 pt-3 border-t border-gray-300">
-                                      <p className="text-blue-700 font-semibold text-sm">
+                                    <div className={`mt-3 pt-3 border-t ${
+                                      isDarkMode ? 'border-gray-600' : 'border-gray-300'
+                                    }`}>
+                                      <p className={`font-semibold text-sm ${
+                                        isDarkMode ? 'text-blue-400' : 'text-blue-700'
+                                      }`}>
                                         🕒 Assigned Time: {timeAssignments[rowId]}
                                       </p>
                                     </div>
@@ -316,9 +339,19 @@ function App() {
                               
                               {/* Combined Plain Text Result */}
                               {timeAssignments[rowId] && (
-                                <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-3">
-                                  <p className="text-xs font-medium text-blue-700 mb-1">Plain Text Result:</p>
-                                  <p className="text-blue-800 font-mono text-sm">
+                                <div className={`mt-4 border rounded-lg p-3 ${
+                                  isDarkMode 
+                                    ? 'bg-blue-900 border-blue-700' 
+                                    : 'bg-blue-50 border-blue-200'
+                                }`}>
+                                  <p className={`text-xs font-medium mb-1 ${
+                                    isDarkMode ? 'text-blue-300' : 'text-blue-700'
+                                  }`}>
+                                    Plain Text Result:
+                                  </p>
+                                  <p className={`font-mono text-sm ${
+                                    isDarkMode ? 'text-blue-200' : 'text-blue-800'
+                                  }`}>
                                     {formatRowData(match.data)} | Time: {timeAssignments[rowId]}
                                   </p>
                                 </div>
