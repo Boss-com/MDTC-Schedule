@@ -108,6 +108,47 @@ function App() {
     return data.filter(cell => cell.trim() !== '').join(' | ');
   };
 
+  const copyToClipboard = async (text, type = 'result') => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopyFeedback(`${type} copied to clipboard!`);
+      setTimeout(() => setCopyFeedback(''), 2000);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+      setCopyFeedback('Failed to copy to clipboard');
+      setTimeout(() => setCopyFeedback(''), 2000);
+    }
+  };
+
+  const copyIndividualResult = (match, rowId) => {
+    const rowData = formatRowData(match.data);
+    const timeAssignment = timeAssignments[rowId];
+    const fullResult = timeAssignment ? `${rowData} | Time: ${timeAssignment}` : rowData;
+    copyToClipboard(fullResult, 'Result');
+  };
+
+  const copyAllResults = () => {
+    let allResults = [];
+    results.forEach(result => {
+      if (result.matches && result.matches.length > 0) {
+        result.matches.forEach(match => {
+          const rowId = `${result.query_id}-${match.row_number}`;
+          const rowData = formatRowData(match.data);
+          const timeAssignment = timeAssignments[rowId];
+          const fullResult = timeAssignment ? `${rowData} | Time: ${timeAssignment}` : rowData;
+          allResults.push(fullResult);
+        });
+      }
+    });
+    
+    const combinedResults = allResults.join('\n');
+    copyToClipboard(combinedResults, 'All results');
+  };
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
       <div className="max-w-6xl mx-auto px-4">
