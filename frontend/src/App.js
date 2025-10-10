@@ -422,26 +422,40 @@ function App() {
             ))}
 
             {/* Summary */}
-            <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl border border-green-200 p-6">
-              <h4 className="font-semibold text-gray-800 mb-2">Search Summary</h4>
+            <div className={`rounded-xl border p-6 ${
+              isDarkMode 
+                ? 'bg-gradient-to-r from-gray-800 to-gray-700 border-gray-600' 
+                : 'bg-gradient-to-r from-green-50 to-blue-50 border-green-200'
+            }`}>
+              <h4 className={`font-semibold mb-2 ${
+                isDarkMode ? 'text-white' : 'text-gray-800'
+              }`}>
+                Search Summary
+              </h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                <div className="text-center p-3 bg-white rounded-lg">
+                <div className={`text-center p-3 rounded-lg ${
+                  isDarkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white'
+                }`}>
                   <p className="text-2xl font-bold text-blue-600">
                     {results.reduce((sum, result) => sum + result.count, 0)}
                   </p>
-                  <p className="text-gray-600">Total Matches</p>
+                  <p className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>Total Matches</p>
                 </div>
-                <div className="text-center p-3 bg-white rounded-lg">
+                <div className={`text-center p-3 rounded-lg ${
+                  isDarkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white'
+                }`}>
                   <p className="text-2xl font-bold text-green-600">
                     {Object.keys(timeAssignments).length}
                   </p>
-                  <p className="text-gray-600">Time Assigned</p>
+                  <p className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>Time Assigned</p>
                 </div>
-                <div className="text-center p-3 bg-white rounded-lg">
+                <div className={`text-center p-3 rounded-lg ${
+                  isDarkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white'
+                }`}>
                   <p className="text-2xl font-bold text-purple-600">
                     {results.length}
                   </p>
-                  <p className="text-gray-600">IDs Searched</p>
+                  <p className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>IDs Searched</p>
                 </div>
               </div>
             </div>
