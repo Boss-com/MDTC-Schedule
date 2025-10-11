@@ -108,38 +108,62 @@ function App() {
     return data.filter(cell => cell.trim() !== '').join(' | ');
   };
 
-  const copyToClipboard = async (text, type = 'result') => {
+  const copyToClipboard = (text, type = 'result') => {
+    console.log('Attempting to copy:', text);
+    
+    // Method 1: Try modern clipboard API
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text)
+        .then(() => {
+          setCopyFeedback(`✅ ${type} copied to clipboard!`);
+          setTimeout(() => setCopyFeedback(''), 3000);
+          console.log('Copy successful via clipboard API');
+        })
+        .catch((err) => {
+          console.log('Clipboard API failed, trying fallback:', err);
+          fallbackCopy(text, type);
+        });
+    } else {
+      // Method 2: Fallback for browsers without clipboard API
+      fallbackCopy(text, type);
+    }
+  };
+
+  const fallbackCopy = (text, type) => {
     try {
-      // Try the modern clipboard API first
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(text);
-        setCopyFeedback(`${type} copied to clipboard!`);
-        setTimeout(() => setCopyFeedback(''), 3000);
-        return;
-      }
-      
-      // Fallback method for older browsers or non-secure contexts
+      // Create a temporary textarea element
       const textArea = document.createElement('textarea');
       textArea.value = text;
-      textArea.style.position = 'fixed';
-      textArea.style.left = '-999999px';
-      textArea.style.top = '-999999px';
+      
+      // Make it invisible but accessible
+      textArea.style.position = 'absolute';
+      textArea.style.left = '-9999px';
+      textArea.style.top = '0';
+      textArea.style.opacity = '0';
+      textArea.style.pointerEvents = 'none';
+      textArea.style.tabIndex = '-1';
+      
       document.body.appendChild(textArea);
-      textArea.focus();
+      
+      // Select and copy
       textArea.select();
+      textArea.setSelectionRange(0, 99999); // For mobile devices
       
       const successful = document.execCommand('copy');
       document.body.removeChild(textArea);
       
       if (successful) {
-        setCopyFeedback(`${type} copied to clipboard!`);
+        setCopyFeedback(`✅ ${type} copied to clipboard!`);
         setTimeout(() => setCopyFeedback(''), 3000);
+        console.log('Copy successful via fallback method');
       } else {
-        throw new Error('Copy command failed');
+        throw new Error('execCommand failed');
       }
     } catch (err) {
-      console.error('Failed to copy: ', err);
-      setCopyFeedback('Copy failed - please select and copy manually');
+      console.error('All copy methods failed:', err);
+      // Show the text in an alert as last resort
+      alert(`Copy failed. Please manually copy this text:\n\n${text}`);
+      setCopyFeedback('❌ Copy failed - text shown in alert');
       setTimeout(() => setCopyFeedback(''), 3000);
     }
   };
