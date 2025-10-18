@@ -332,6 +332,18 @@ function App() {
             
             <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
               <p>💡 Tip: Enter multiple IDs separated by commas to filter multiple rows at once</p>
+              <div className="mt-2">
+                <button
+                  onClick={() => {
+                    console.log('Simple test button clicked!');
+                    alert('Test button works! Now testing copy...');
+                    copyToClipboard('Simple test text - this should be copied to clipboard', 'Test');
+                  }}
+                  className="px-3 py-1 bg-purple-600 text-white text-xs rounded hover:bg-purple-700"
+                >
+                  🧪 Test Copy Function
+                </button>
+              </div>
             </div>
           </div>
         </div>
