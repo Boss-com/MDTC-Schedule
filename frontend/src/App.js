@@ -168,11 +168,11 @@ function App() {
     }
   };
 
-  const copyIndividualResult = (match, rowId) => {
+  const copyIndividualResult = (match, rowId, number) => {
     const rowData = formatRowData(match.data);
     const timeAssignment = timeAssignments[rowId];
-    // Copy the exact format shown in the "Plain Text Result" box
-    const resultToCopy = timeAssignment ? `${rowData} | Time: ${timeAssignment}` : rowData;
+    // Copy the exact format shown in the "Plain Text Result" box with numbering
+    const resultToCopy = timeAssignment ? `${number}. ${rowData} | Time: ${timeAssignment}` : `${number}. ${rowData}`;
     console.log('Copying individual result:', resultToCopy);
     copyToClipboard(resultToCopy, 'Result');
   };
