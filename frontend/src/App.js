@@ -481,9 +481,9 @@ function App() {
                             </div>
                           </div>
                         </div>
-                          );
-                        })}
-                      </div>
+                      );
+                    })}
+                  </div>
                 ) : (
                   <div className="p-6 text-center">
                     <div className={`mb-2 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>
