@@ -498,10 +498,10 @@ function App() {
                     </p>
                   </div>
                 )}
-              </div>
-            ))}
+                </div>
+              ))}
 
-            {/* Summary */}
+              {/* Summary */}
             <div className={`rounded-xl border p-6 ${
               isDarkMode 
                 ? 'bg-gradient-to-r from-gray-800 to-gray-700 border-gray-600' 
