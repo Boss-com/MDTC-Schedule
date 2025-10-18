@@ -410,7 +410,11 @@ function App() {
                                     </p>
                                   </div>
                                   <button
-                                    onClick={() => copyIndividualResult(match, rowId)}
+                                    onClick={() => {
+                                      console.log('Copy button clicked!');
+                                      alert('Copy button clicked - check console');
+                                      copyIndividualResult(match, rowId);
+                                    }}
                                     className={`ml-3 px-3 py-1 text-xs font-medium rounded-lg transition-colors ${
                                       isDarkMode 
                                         ? 'bg-blue-800 text-blue-200 hover:bg-blue-700 border border-blue-600' 
