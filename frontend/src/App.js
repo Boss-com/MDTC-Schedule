@@ -301,11 +301,7 @@ function App() {
                 {results.length > 0 && (
                   <>
                     <button
-                      onClick={() => {
-                        console.log('Copy All button clicked!');
-                        alert('Copy All button clicked - check console');
-                        copyAllResults();
-                      }}
+                      onClick={copyAllResults}
                       className={`px-6 py-3 font-semibold rounded-lg focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors ${
                         isDarkMode 
                           ? 'bg-green-700 text-white hover:bg-green-600' 
