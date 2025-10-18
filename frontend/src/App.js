@@ -538,9 +538,10 @@ function App() {
                   <p className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>IDs Searched</p>
                 </div>
               </div>
+              </div>
             </div>
-          </div>
-        )}
+          );
+        })()}
 
         {/* Footer */}
         <div className={`text-center mt-8 text-sm ${
