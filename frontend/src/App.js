@@ -362,11 +362,20 @@ function App() {
                           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
                             {/* Combined Row Info and Result Display */}
                             <div className="lg:col-span-1">
-                              <p className={`text-sm font-medium mb-2 ${
-                                isDarkMode ? 'text-gray-400' : 'text-gray-500'
-                              }`}>
-                                Row #{match.row_number} - Complete Result
-                              </p>
+                              <div className="flex items-center mb-2">
+                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-3 ${
+                                  isDarkMode 
+                                    ? 'bg-blue-600 text-white' 
+                                    : 'bg-blue-100 text-blue-800'
+                                }`}>
+                                  {globalCounter}
+                                </div>
+                                <p className={`text-sm font-medium ${
+                                  isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                                }`}>
+                                  Row #{match.row_number} - Complete Result
+                                </p>
+                              </div>
                               <div className={`rounded-lg p-4 border-l-4 border-blue-500 ${
                                 isDarkMode ? 'bg-gray-700' : 'bg-gray-100'
                               }`}>
