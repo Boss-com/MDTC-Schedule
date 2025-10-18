@@ -335,27 +335,30 @@ function App() {
         {/* Results Section */}
         {results.length > 0 && (
           <div className="space-y-6">
-            {results.map((result, resultIndex) => (
-              <div key={resultIndex} className={`rounded-xl shadow-lg overflow-hidden ${
-                isDarkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white'
-              }`}>
-                <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4">
-                  <h3 className="text-xl font-semibold text-white">
-                    Search ID: "{result.query_id}" 
-                    <span className="ml-3 text-blue-200 text-sm">
-                      ({result.count} {result.count === 1 ? 'match' : 'matches'} found)
-                    </span>
-                  </h3>
-                </div>
+            {(() => {
+              let globalCounter = 0;
+              return results.map((result, resultIndex) => (
+                <div key={resultIndex} className={`rounded-xl shadow-lg overflow-hidden ${
+                  isDarkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white'
+                }`}>
+                  <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4">
+                    <h3 className="text-xl font-semibold text-white">
+                      Search ID: "{result.query_id}" 
+                      <span className="ml-3 text-blue-200 text-sm">
+                        ({result.count} {result.count === 1 ? 'match' : 'matches'} found)
+                      </span>
+                    </h3>
+                  </div>
 
-                {result.matches.length > 0 ? (
-                  <div className={`divide-y ${isDarkMode ? 'divide-gray-700' : 'divide-gray-200'}`}>
-                    {result.matches.map((match, matchIndex) => {
-                      const rowId = `${result.query_id}-${match.row_number}`;
-                      return (
-                        <div key={matchIndex} className={`p-6 transition-colors ${
-                          isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'
-                        }`}>
+                  {result.matches.length > 0 ? (
+                    <div className={`divide-y ${isDarkMode ? 'divide-gray-700' : 'divide-gray-200'}`}>
+                      {result.matches.map((match, matchIndex) => {
+                        globalCounter++;
+                        const rowId = `${result.query_id}-${match.row_number}`;
+                        return (
+                          <div key={matchIndex} className={`p-6 transition-colors ${
+                            isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'
+                          }`}>
                           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
                             {/* Combined Row Info and Result Display */}
                             <div className="lg:col-span-1">
