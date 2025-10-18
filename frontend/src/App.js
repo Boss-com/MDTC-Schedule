@@ -179,14 +179,16 @@ function App() {
 
   const copyAllResults = () => {
     let allPlainTextResults = [];
+    let counter = 0;
     results.forEach(result => {
       if (result.matches && result.matches.length > 0) {
         result.matches.forEach(match => {
+          counter++;
           const rowId = `${result.query_id}-${match.row_number}`;
           const rowData = formatRowData(match.data);
           const timeAssignment = timeAssignments[rowId];
-          // Copy the exact format from the plain text result boxes
-          const plainTextResult = timeAssignment ? `${rowData} | Time: ${timeAssignment}` : rowData;
+          // Copy the exact format from the plain text result boxes with numbering
+          const plainTextResult = timeAssignment ? `${counter}. ${rowData} | Time: ${timeAssignment}` : `${counter}. ${rowData}`;
           allPlainTextResults.push(plainTextResult);
         });
       }
