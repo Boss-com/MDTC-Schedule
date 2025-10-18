@@ -335,11 +335,11 @@ function App() {
         </div>
 
         {/* Results Section */}
-        {results.length > 0 && (
-          <div className="space-y-6">
-            {(() => {
-              let globalCounter = 0;
-              return results.map((result, resultIndex) => (
+        {results.length > 0 && (() => {
+          let globalCounter = 0;
+          return (
+            <div className="space-y-6">
+              {results.map((result, resultIndex) => (
                 <div key={resultIndex} className={`rounded-xl shadow-lg overflow-hidden ${
                   isDarkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white'
                 }`}>
