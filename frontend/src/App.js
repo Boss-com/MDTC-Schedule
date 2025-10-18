@@ -410,19 +410,19 @@ function App() {
                                     <p className={`text-xs font-medium mb-1 ${
                                       isDarkMode ? 'text-blue-300' : 'text-blue-700'
                                     }`}>
-                                      Plain Text Result:
+                                      Plain Text Result #{globalCounter}:
                                     </p>
                                     <p className={`font-mono text-sm ${
                                       isDarkMode ? 'text-blue-200' : 'text-blue-800'
                                     }`}>
                                       {timeAssignments[rowId] ? 
-                                        `${formatRowData(match.data)} | Time: ${timeAssignments[rowId]}` :
-                                        formatRowData(match.data)
+                                        `${globalCounter}. ${formatRowData(match.data)} | Time: ${timeAssignments[rowId]}` :
+                                        `${globalCounter}. ${formatRowData(match.data)}`
                                       }
                                     </p>
                                   </div>
                                   <button
-                                    onClick={() => copyIndividualResult(match, rowId)}
+                                    onClick={() => copyIndividualResult(match, rowId, globalCounter)}
                                     className={`ml-3 px-3 py-1 text-xs font-medium rounded-lg transition-colors ${
                                       isDarkMode 
                                         ? 'bg-blue-800 text-blue-200 hover:bg-blue-700 border border-blue-600' 
